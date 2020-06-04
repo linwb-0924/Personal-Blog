@@ -1,0 +1,17 @@
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
+  profiles:
+    active: dev
+
+
+logging:
+  level:
+    root: info
+    org.fjnu: debug
+  file:
+    path: log/
+    name: blog.log
+
+

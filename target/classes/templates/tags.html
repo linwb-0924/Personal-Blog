@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width",initial-scale="1.0">
+    <title>标签</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="css/me.css">
+</head>
+<body>
+    <!-- 导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">Blog</h2>
+                <a href="#" th:href="@{/}" class=" item m-mobile"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/type}" class=" item m-mobile"><i class="idea icon"></i>分类</a>
+                <a href="#"  th:href="@{/tags}" class="active item m-mobile"><i class="tag icon"></i>便签</a>
+                <a href="#" th:href="@{/archives}" class="item m-mobile"><i class="clone icon"></i>归档</a>
+                <a href="#" th:href="@{/about}" class="item m-mobile"><i class="info icon"></i>关于我</a>
+
+                <div class="right item">
+                    <div class="ui icon  input m-mobile">
+                        <input type="text" placeholder="Search....">
+                        <i class="search link icon"></i>
+                    </div>
+                 <!--
+                <a href="#" target="ui black icon button"><i class="sidebar icon"></i></a>
+                    -->
+            </div>
+        </div>
+        </div>
+    </nav>
+    <!-- 中间内容-->
+    <div class="m-padded-tb-large m-container">
+        <div class="ui container">
+            <div class="ui  top attached segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h3 class="ui teal header">标签</h3>
+                    </div>
+                    <div class="right aligned column">
+                        共<h3 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}">14</h3>个
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui teal segment">
+                <a href="#"  class="ui  basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}" th:href="@{/tags/tag/(name=${tag.name})}">
+                    <span th:text="${tag.name}">方法论</span>
+                    <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
+                </a>
+            </div>
+
+
+            <div class="ui attached  segment ">
+                <div class="ui  padded  vertical segment m-padded-tb-large">
+                    <div class="ui  mobile reversed stackable grid" th:each="blog : ${page.content}">
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#"  th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"  class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>
+                            <p class="m-text" >请点击查看.....</p>
+                            <div class="ui grid">
+                                <div class="eleven wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <img src="https://s1.ax1x.com/2020/05/28/teDAGF.jpg"  alt="" class="ui avatar image">
+                                            <div class="content">
+                                                <a href="#" class="header" >林伟彬</a>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i><span th:text="${blog.views}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned five wide column">
+                                    <a href="#" target="_blank" class="ui teal basic label" th:text="${blog.type.name}">认知升级</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="five wide column">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <img src="https://s1.ax1x.com/2020/05/28/tewMa8.jpg" th:src="${blog.firstPicture}" alt="" class="ui rounded image" style="width: 250px" height="150px">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ui bottom attached segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <a th:href="@{/tags(page=${page.number}-1)}" class="ui teal basic button">上一页</a>
+                    </div>
+                    <div class="right aligned column">
+                        <a href="#"  th:href="@{/tags(page=${page.number}+1)}" class="ui teal basic button">下一页</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 底部footer-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui  inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="images/wechat.jpg" class="ui rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">用户故事(User Story)</a>
+                        <a href="#" class="item">用户故事(User Story)</a>
+                        <a href="#" class="item">用户故事(User Story)</a>
+                        <a href="#" class="item">用户故事(User Story)</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Email:linwb0924@163.com</a>
+                        <a href="#" class="item">QQ:345504450</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">Linweibin</h4>
+                    <p class="m-text-thin m-text-spaced">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人一些帮助与启发</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright @ 2020 - 2021 Linweibin Designed by Linweibin</p>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+</body>
+</html>
